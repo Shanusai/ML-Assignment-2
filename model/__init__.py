@@ -1,0 +1,6 @@
+from .logistic_regression_model import get_model_and_params as get_lr_model_and_params
+from .decision_tree_model import get_model_and_params as get_dt_model_and_params
+from .knn_model import get_model_and_params as get_knn_model_and_params
+from .naive_bayes_model import get_model_and_params as get_nb_model_and_params
+from .random_forest_model import get_model_and_params as get_rf_model_and_params
+from .xgboost_model import get_model_and_params as get_xgb_model_and_params
