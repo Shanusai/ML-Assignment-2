@@ -66,7 +66,7 @@ The script `model/run_hyperparameter_search.py` performs hyperparameter search f
 
 ```bash
 cd project-folder/model
-python3 run_hyperparameter_search.py --data "../Customer Churn.csv" --output artifacts
+python3 run_hyperparameter_search.py --data "../train.csv" --output artifacts
 ```
 
 ## Run Streamlit App
