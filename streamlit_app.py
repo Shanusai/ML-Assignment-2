@@ -14,7 +14,7 @@ from sklearn.metrics import (
 )
 
 st.set_page_config(page_title="Customer Churn – ML Assignment 2", layout="wide")
-st.title("📊 Customer Churn – ML Assignment 2")
+st.title("Customer Churn – ML Assignment 2")
 
 TARGET_COL = "Churn"
 
