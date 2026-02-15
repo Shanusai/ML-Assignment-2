@@ -129,7 +129,7 @@ model_choice = st.sidebar.selectbox(
         "All models",
         "Logistic Regression",
         "Decision Tree",
-        "KNN",
+        "kNN",
         "Naive Bayes (Gaussian)",
         "Random Forest",
         "XGBoost"
@@ -145,7 +145,7 @@ def load_models():
     model_files = {
         "Logistic Regression": "model/artifacts/logistic_regression_best.joblib",
         "Decision Tree": "model/artifacts/decision_tree_best.joblib",
-        "KNN": "model/artifacts/knn_best.joblib",
+        "kNN": "model/artifacts/knn_best.joblib",
         "Naive Bayes (Gaussian)": "model/artifacts/naive_bayes_best.joblib",
         "Random Forest": "model/artifacts/random_forest_best.joblib",
         "XGBoost": "model/artifacts/xgboost_best.joblib",

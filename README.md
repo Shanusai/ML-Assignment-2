@@ -27,7 +27,7 @@ Predict whether a customer will churn based on their usage and demographic data.
 Six ML models were trained and evaluated:
 - Logistic Regression
 - Decision Tree
-- KNN
+- kNN
 - Naive Bayes
 - Random Forest (Ensemble)
 - XGBoost (Ensemble)
@@ -39,7 +39,7 @@ Six ML models were trained and evaluated:
 | XGBoost | 0.963 | 0.990 | 0.858 | 0.919 | 0.888 | 0.867 |
 | Random Forest | 0.940 | 0.985 | 0.736 | 0.960 | 0.833 | 0.808 |
 | Decision Tree | 0.944 | 0.912 | 0.802 | 0.859 | 0.829 | 0.797 |
-| KNN | 0.941 | 0.961 | 0.772 | 0.889 | 0.826 | 0.794 |
+| kNN | 0.941 | 0.961 | 0.772 | 0.889 | 0.826 | 0.794 |
 | Logistic Regression | 0.871 | 0.926 | 0.562 | 0.818 | 0.667 | 0.606 |
 | Naive Bayes (Gaussian) | 0.735 | 0.908 | 0.361 | 0.889 | 0.513 | 0.445 |
 
@@ -48,7 +48,7 @@ Six ML models were trained and evaluated:
 |----------------------|---------------------------------------------|
 | Logistic Regression  | Moderate overall (Accuracy 0.871, AUC 0.926). Good balance with recall (0.818) capturing most churns while precision (0.562) keeps false positives moderate; F1 (0.667) and MCC (0.606) make it a solid interpretable baseline. |
 | Decision Tree        | Strong and balanced (Accuracy 0.944, AUC 0.912) with good precision (0.802) and recall (0.859). F1 (0.829) and MCC (0.797) indicate reliable classification with interpretable decisions. |
-| KNN                  | High AUC (0.961) and good recall (0.889); precision (0.772) is lower than top ensembles. F1 (0.826) and MCC (0.794) show KNN is competitive when features are scaled appropriately. |
+| kNN                  | High AUC (0.961) and good recall (0.889); precision (0.772) is lower than top ensembles. F1 (0.826) and MCC (0.794) show kNN is competitive when features are scaled appropriately. |
 | Naive Bayes (Gaussian)| Decent recall (0.889) but lower precision (0.361) and moderate accuracy (0.735). F1 (0.513) and MCC (0.445) indicate it's a fast baseline with limited overall effectiveness. |
 | Random Forest        | Very strong AUC (0.985) and excellent recall (0.960) with balanced precision (0.736). F1 (0.833) and MCC (0.808) show ensemble robustness and strong holdout performance. |
 | XGBoost              | Best overall (Accuracy 0.963, AUC 0.990). High precision (0.858) and recall (0.919) yield top F1 (0.888) and MCC (0.867), making XGBoost the recommended production model for performance-focused use. |
