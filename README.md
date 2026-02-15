@@ -33,14 +33,15 @@ Six ML models were trained and evaluated:
 - XGBoost (Ensemble)
 
 ### Comparison Table: Evaluation Metrics
-| ML Model Name         | Accuracy | AUC      | Precision | Recall   | F1      | MCC      |
-|----------------------|----------:|---------:|----------:|---------:|--------:|---------:|
-| Logistic Regression  | 0.871 | 0.926 | 0.562 | 0.818 | 0.667 | 0.606 |
-| Decision Tree        | 0.944 | 0.912 | 0.802 | 0.859 | 0.829 | 0.797 |
-| KNN                  | 0.941 | 0.961 | 0.772 | 0.889 | 0.826 | 0.794 |
-| Naive Bayes (Gaussian)| 0.735 | 0.908 | 0.361 | 0.889 | 0.513 | 0.445 |
-| Random Forest        | 0.940 | 0.985 | 0.736 | 0.960 | 0.833 | 0.808 |
-| XGBoost              | 0.963 | 0.990 | 0.858 | 0.919 | 0.888 | 0.867 |
+
+| ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
+|---|---:|---:|---:|---:|---:|---:|
+| XGBoost | 0.963 | 0.990 | 0.858 | 0.919 | 0.888 | 0.867 |
+| Random Forest | 0.940 | 0.985 | 0.736 | 0.960 | 0.833 | 0.808 |
+| Decision Tree | 0.944 | 0.912 | 0.802 | 0.859 | 0.829 | 0.797 |
+| KNN | 0.941 | 0.961 | 0.772 | 0.889 | 0.826 | 0.794 |
+| Logistic Regression | 0.871 | 0.926 | 0.562 | 0.818 | 0.667 | 0.606 |
+| Naive Bayes (Gaussian) | 0.735 | 0.908 | 0.361 | 0.889 | 0.513 | 0.445 |
 
 ### Observations on Model Performance [3 marks]
 | ML Model Name         | Detailed Observation about model performance |
