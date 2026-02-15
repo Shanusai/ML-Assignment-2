@@ -1,7 +1,7 @@
-# Customer Churn Prediction Assignment
+# Assignment 2- Customer Churn Prediction
 
 ## a. Problem Statement
-Predict whether a customer will churn (leave the service) based on their usage and demographic data. The goal is to build and compare multiple machine learning models to identify the best approach for churn prediction.
+Predict whether a customer will churn based on their usage and demographic data. The goal is to build and compare multiple machine learning models to identify the best approach for churn prediction.
 
 ## b. Dataset Description [1 mark]
 - **Source:** Customer Churn.csv
