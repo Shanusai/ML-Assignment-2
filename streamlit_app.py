@@ -96,9 +96,9 @@ Saved visuals (`eda_churn_distribution.png`, `eda_corr_heatmap.png`) are shown.
 if os.path.exists("eda_churn_distribution.png") and os.path.exists("eda_corr_heatmap.png"):
     c1, c2 = st.columns(2)
     with c1:
-        st.image("eda_churn_distribution.png", caption="Churn Class Distribution", width=600)
+        st.image("eda_churn_distribution.png", caption="Churn Class Distribution", width=500)
     with c2:
-        st.image("eda_corr_heatmap.png", caption="Feature Correlation Heatmap", width=600)
+        st.image("eda_corr_heatmap.png", caption="Feature Correlation Heatmap", width=500)
 else:
     st.info("EDA plots not found. Please run the EDA script to generate them.")
 
@@ -110,11 +110,8 @@ st.markdown(
 
     - Normalize column names (strip and collapse whitespace).
     - Trim whitespace from string/object columns.
-    - Coerce object columns that are numeric-like when the majority of values convert to numeric.
-    - Impute numeric columns with the column median.
-    - Impute categorical columns with the explicit token `'missing'` and cast to `category`.
-    - Add log1p-transformed copies for identified skewed numeric features (e.g., `Charge Amount`, `Customer Value`, `Seconds of Use`).
-    - Ensure the `Churn` target is integer-typed and perform a stratified train/test split (80/20) to preserve class balance; outputs saved as `train.csv` and `test.csv`.
+    - Added log1p-transformed copies for identified skewed numeric features (e.g., `Charge Amount`, `Customer Value`, `Seconds of Use`).
+    - Ensured the `Churn` target is integer-typed and perform a stratified train/test split (80/20) to preserve class balance; outputs saved as `train.csv` and `test.csv`.
     """
 )
 
