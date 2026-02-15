@@ -3,7 +3,7 @@
 ## a. Problem Statement
 Predict whether a customer will churn based on their usage and demographic data. The goal is to build and compare multiple machine learning models to identify the best approach for churn prediction.
 
-## b. Dataset Description [1 mark]
+## b. Dataset Description
 - **Source:** Customer Churn.csv
 - **Target:** `Churn` (0 = No churn, 1 = Churn). Note: this is an imbalanced dataset — the churn class (`1`) is the minority class. Take care during model development and evaluation (use stratified splits, consider class weights or resampling, and prefer metrics such as AUC, precision, recall, F1 and MCC over accuracy alone).
 - **Features:**
@@ -23,7 +23,7 @@ Predict whether a customer will churn based on their usage and demographic data.
      - `Customer Value` — numeric (e.g., lifetime value or average revenue): key feature for prioritizing retention — scale and handle missing carefully.
      - `Churn` (Target) — binary: 0 = No churn, 1 = Churn. This is the minority class (imbalanced dataset).
 
-## c. Models Used [6 marks]
+## c. Models Used
 Six ML models were trained and evaluated:
 - Logistic Regression
 - Decision Tree
@@ -43,7 +43,7 @@ Six ML models were trained and evaluated:
 | Logistic Regression | 0.871 | 0.926 | 0.562 | 0.818 | 0.667 | 0.606 |
 | Naive Bayes (Gaussian) | 0.735 | 0.908 | 0.361 | 0.889 | 0.513 | 0.445 |
 
-### Observations on Model Performance [3 marks]
+### Observations on Model Performance
 | ML Model Name         | Detailed Observation about model performance |
 |----------------------|---------------------------------------------|
 | Logistic Regression  | Moderate overall (Accuracy 0.871, AUC 0.926). Good balance with recall (0.818) capturing most churns while precision (0.562) keeps false positives moderate; F1 (0.667) and MCC (0.606) make it a solid interpretable baseline. |
