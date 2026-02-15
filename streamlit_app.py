@@ -72,7 +72,7 @@ def show_roc_curve(y_true, y_prob, title="ROC Curve"):
 
 st.header("1.1 Exploratory Data Analysis (EDA)")
 st.markdown("""
-EDA was performed on the provided dataset (`Customer Churn.csv`). Key, verified facts and initial signals:
+EDA was performed on the dataset (`Customer Churn.csv`).
 
 - **Dataset overview:** 3,150 samples and 13 input features (14 columns including the `Churn` target).
 
@@ -91,6 +91,8 @@ EDA was performed on the provided dataset (`Customer Churn.csv`). Key, verified 
     - `Subscription  Length`: 0.033
 
 Saved visuals (`eda_churn_distribution.png`, `eda_corr_heatmap.png`) are shown.
+            
+Best metric to take into account for this imbalanced classification problem is **MCC** (Matthews Correlation Coefficient) as it considers all four confusion matrix categories and is robust to class imbalance.
 """)
 
 if os.path.exists("eda_churn_distribution.png") and os.path.exists("eda_corr_heatmap.png"):
