@@ -5,21 +5,23 @@ Predict whether a customer will churn (leave the service) based on their usage a
 
 ## b. Dataset Description [1 mark]
 - **Source:** Customer Churn.csv
+- **Target:** `Churn` (0 = No churn, 1 = Churn). Note: this is an imbalanced dataset — the churn class (`1`) is the minority class. Take care during model development and evaluation (use stratified splits, consider class weights or resampling, and prefer metrics such as AUC, precision, recall, F1 and MCC over accuracy alone).
 - **Features:**
-    - Call Failure
-    - Complains
-    - Subscription Length
-    - Charge Amount
-    - Seconds of Use
-    - Frequency of Use
-    - Frequency of SMS
-    - Distinct Called Numbers
-    - Age Group
-    - Tariff Plan
-    - Status
-    - Age
-    - Customer Value
-    - Churn (Target: 0 = No churn, 1 = Churn)
+ - **Features:** (each feature includes suggested type and brief notes)
+     - `Call Failure` — numeric (count) or binary indicator: number of failed calls; higher values often indicate service issues and higher churn risk. Treat as numeric, cap outliers.
+     - `Complains` — numeric (count) or binary: customer complaints logged; strong positive signal for churn. Consider time-windowed counts.
+     - `Subscription Length` — numeric (months/days): tenure in service; longer tenure usually correlates with lower churn. Use as-is or bucket into bins.
+     - `Charge Amount` — numeric (monetary): total/average charges; can indicate customer value or bill shock. Scale/normalize and examine skew.
+     - `Seconds of Use` — numeric: total voice usage seconds in period; indicates engagement. Consider per-day averages.
+     - `Frequency of Use` — numeric: number of calls/sessions in period; high usage typically reduces churn risk.
+     - `Frequency of SMS` — numeric: number of SMS sent/received; another engagement signal.
+     - `Distinct Called Numbers` — numeric: unique contacts called; higher diversity often means stronger network effects and lower churn.
+     - `Age Group` — categorical (e.g., 18-25, 26-35): encode with one-hot or ordinal depending on model; may interact with usage patterns.
+     - `Tariff Plan` — categorical: subscription/tariff type; important for pricing-related churn — use one-hot or target encoding for high-cardinality plans.
+     - `Status` — categorical/binary: active/inactive/paused; direct indicator of customer relationship state.
+     - `Age` — numeric: customer age; can be used directly or to derive `Age Group` if missing.
+     - `Customer Value` — numeric (e.g., lifetime value or average revenue): key feature for prioritizing retention — scale and handle missing carefully.
+     - `Churn` (Target) — binary: 0 = No churn, 1 = Churn. This is the minority class (imbalanced dataset).
 
 ## c. Models Used [6 marks]
 Six ML models were trained and evaluated:
@@ -32,33 +34,33 @@ Six ML models were trained and evaluated:
 
 ### Comparison Table: Evaluation Metrics
 | ML Model Name         | Accuracy | AUC      | Precision | Recall   | F1      | MCC      |
-|----------------------|----------|----------|-----------|----------|---------|----------|
-| Logistic Regression  | 0.879    | 0.929    | 0.714     | 0.380    | 0.496   | 0.462    |
-| Decision Tree        | 0.931    | 0.886    | 0.768     | 0.797    | 0.783   | 0.741    |
-| kNN                  | 0.962    | 0.954    | 0.895     | 0.861    | 0.877   | 0.855    |
-| Naive Bayes          | 0.754    | 0.900    | 0.381     | 0.911    | 0.537   | 0.478    |
-| Random Forest        | 0.950    | 0.987    | 0.875     | 0.797    | 0.834   | 0.807    |
-| XGBoost              | 0.962    | 0.989    | 0.885     | 0.873    | 0.879   | 0.857    |
+|----------------------|----------:|---------:|----------:|---------:|--------:|---------:|
+| Logistic Regression  | 0.871 | 0.926 | 0.562 | 0.818 | 0.667 | 0.606 |
+| Decision Tree        | 0.944 | 0.912 | 0.802 | 0.859 | 0.829 | 0.797 |
+| KNN                  | 0.941 | 0.961 | 0.772 | 0.889 | 0.826 | 0.794 |
+| Naive Bayes (Gaussian)| 0.735 | 0.908 | 0.361 | 0.889 | 0.513 | 0.445 |
+| Random Forest        | 0.940 | 0.985 | 0.736 | 0.960 | 0.833 | 0.808 |
+| XGBoost              | 0.963 | 0.990 | 0.858 | 0.919 | 0.888 | 0.867 |
 
 ### Detailed Observations on Model Performance (Test Data)
 | ML Model Name         | Detailed Observation about model performance |
 |----------------------|---------------------------------------------|
-| Logistic Regression  | Logistic Regression achieves moderate accuracy (0.86) and AUC (0.94). Its recall is high (0.87), meaning it identifies most churn cases, but precision is low (0.54), so it produces many false positives. The F1 and MCC scores indicate balanced but not outstanding performance. This model is simple and interpretable, but may not be ideal for highly imbalanced or complex datasets. |
-| Decision Tree        | Decision Tree performs exceptionally well, with accuracy (0.98), AUC (0.98), and high precision (0.91) and recall (0.96). The F1 and MCC scores are also very high, showing the model is both accurate and reliable. It captures churn cases effectively and is robust, but may overfit if not properly tuned. |
-| kNN                  | kNN shows excellent performance, with accuracy (0.98), AUC (0.99), and high recall (0.98). Precision (0.90) and F1 (0.94) are strong, and MCC is high (0.93). This model is sensitive to feature scaling and can be computationally expensive, but works well for this dataset. |
-| Naive Bayes (Gaussian)| Naive Bayes has lower accuracy (0.72) and precision (0.35), but very high recall (0.94), meaning it predicts almost all churn cases, though many are false positives. F1 and MCC are moderate, indicating the model is not well balanced. It is fast and simple, but not optimal for this dataset. |
-| Random Forest        | Random Forest achieves near-perfect accuracy (0.98), AUC (0.99), and recall (0.99). Precision (0.89) and F1 (0.94) are high, and MCC (0.93) shows strong correlation. This ensemble model is robust, handles feature interactions well, and is less prone to overfitting. |
-| XGBoost              | XGBoost is the top performer, with highest accuracy (0.98), AUC (0.99), precision (0.92), recall (0.98), F1 (0.95), and MCC (0.94). It is highly effective for this dataset, capturing churn cases accurately and minimizing false positives. XGBoost is powerful for tabular data and handles complexity well. |
+| Logistic Regression  | Moderate overall (Accuracy 0.871, AUC 0.926). Good balance with recall (0.818) capturing most churns while precision (0.562) keeps false positives moderate; F1 (0.667) and MCC (0.606) make it a solid interpretable baseline. |
+| Decision Tree        | Strong and balanced (Accuracy 0.944, AUC 0.912) with good precision (0.802) and recall (0.859). F1 (0.829) and MCC (0.797) indicate reliable classification with interpretable decisions. |
+| kNN                  | High AUC (0.961) and good recall (0.889); precision (0.772) is lower than top ensembles. F1 (0.826) and MCC (0.794) show kNN is competitive when features are scaled appropriately. |
+| Naive Bayes (Gaussian)| Decent recall (0.889) but lower precision (0.361) and moderate accuracy (0.735). F1 (0.513) and MCC (0.445) indicate it's a fast baseline with limited overall effectiveness. |
+| Random Forest        | Very strong AUC (0.985) and excellent recall (0.960) with balanced precision (0.736). F1 (0.833) and MCC (0.808) show ensemble robustness and strong holdout performance. |
+| XGBoost              | Best overall (Accuracy 0.963, AUC 0.990). High precision (0.858) and recall (0.919) yield top F1 (0.888) and MCC (0.867), making XGBoost the recommended production model for performance-focused use. |
 
 ### Observations on Model Performance [3 marks]
 | ML Model Name         | Observation about model performance |
 |----------------------|-------------------------------------|
-| Logistic Regression  | Logistic Regression achieves moderate accuracy and AUC. Its recall is high, meaning it identifies most churn cases, but precision is low, so it produces many false positives. The F1 and MCC scores indicate balanced but not outstanding performance. This model is simple and interpretable, but may not be ideal for highly imbalanced or complex datasets. |
-| Decision Tree        | Decision Tree performs exceptionally well, with high accuracy, AUC, precision, and recall. The F1 and MCC scores are also very high, showing the model is both accurate and reliable. It captures churn cases effectively and is robust, but may overfit if not properly tuned. |
-| kNN                  | kNN shows excellent performance, with high accuracy, AUC, and recall. Precision and F1 are strong, and MCC is high. This model is sensitive to feature scaling and can be computationally expensive, but works well for this dataset. |
-| Naive Bayes (Gaussian)| Naive Bayes has lower accuracy and precision, but very high recall, meaning it predicts almost all churn cases, though many are false positives. F1 and MCC are moderate, indicating the model is not well balanced. It is fast and simple, but not optimal for this dataset. |
-| Random Forest        | Random Forest achieves near-perfect accuracy, AUC, and recall. Precision and F1 are high, and MCC shows strong correlation. This ensemble model is robust, handles feature interactions well, and is less prone to overfitting. |
-| XGBoost              | XGBoost is the top performer, with highest accuracy, AUC, precision, recall, F1, and MCC. It is highly effective for this dataset, capturing churn cases accurately and minimizing false positives. XGBoost is powerful for tabular data and handles complexity well. |
+| Logistic Regression  | Good balance (Precision 0.5625, Recall 0.8182); solid interpretable baseline (F1 0.6667, MCC 0.6063). |
+| Decision Tree        | Strong and interpretable (Precision 0.8019, Recall 0.8586; F1 0.8293). |
+| KNN                  | Competitive non-parametric option (AUC 0.9611, Recall 0.8889; F1 0.8263). |
+| Naive Bayes (Gaussian)| Fast baseline with high recall but low precision (Precision 0.3607, Recall 0.8889; F1 0.5131). |
+| Random Forest        | Robust ensemble with very high AUC and recall (AUC 0.9854, Recall 0.9596; F1 0.8333). |
+| XGBoost              | Top-performing model (AUC 0.9904, Precision 0.8585, Recall 0.9192; F1 0.8878, MCC 0.8668). |
 
 ## Hyperparameter Trials
 
@@ -73,14 +75,14 @@ The script `model/run_hyperparameter_search.py` performs hyperparameter search f
 
 ```bash
 cd project-folder/model
-python run_hyperparameter_search.py --data "../Customer Churn.csv" --output artifacts
+python3 run_hyperparameter_search.py --data "../Customer Churn.csv" --output artifacts
 ```
 
 ## Run Streamlit App
 
 ```bash
 cd project-folder
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 streamlit run streamlit_app.py
 ```
 

@@ -70,12 +70,27 @@ def show_roc_curve(y_true, y_prob, title="ROC Curve"):
     ax.legend(loc="lower right")
     st.pyplot(fig)
 
-st.header("1. Exploratory Data Analysis (EDA)")
+st.header("1.1 Exploratory Data Analysis (EDA)")
 st.markdown("""
-The EDA is performed on the training set (train.csv). Below are the key insights and visualizations:
-- The dataset contains 7,043 samples with 20 features and a binary target variable 'Churn'.
-- The target variable is imbalanced, with approximately 26.5% of customers churning.
-- The correlation heatmap shows that 'tenure', 'MonthlyCharges', and 'TotalCharges' have some correlation with 'Churn', while other features are less correlated.
+EDA was performed on the provided dataset (`Customer Churn.csv`). Key, verified facts and initial signals:
+
+- **Dataset overview:** 3,150 samples and 13 input features (14 columns including the `Churn` target).
+
+- **Class imbalance:** `Churn` is the minority class — churn rate ≈ 15.71% (0.1571).
+
+- **Top numeric correlations with `Churn` (absolute Pearson):**
+    - `Complains`: 0.532
+    - `Status`: 0.499
+    - `Frequency of use`: 0.303
+    - `Seconds of Use`: 0.299
+    - `Customer Value`: 0.289
+    - `Distinct Called Numbers`: 0.279
+    - `Frequency of SMS`: 0.221
+    - `Charge  Amount`: 0.202
+    - `Tariff Plan`: 0.106
+    - `Subscription  Length`: 0.033
+
+Saved visuals (`eda_churn_distribution.png`, `eda_corr_heatmap.png`) are shown.
 """)
 
 if os.path.exists("eda_churn_distribution.png") and os.path.exists("eda_corr_heatmap.png"):
@@ -86,6 +101,22 @@ if os.path.exists("eda_churn_distribution.png") and os.path.exists("eda_corr_hea
         st.image("eda_corr_heatmap.png", caption="Feature Correlation Heatmap", width=600)
 else:
     st.info("EDA plots not found. Please run the EDA script to generate them.")
+
+# Brief description of preprocessing & split performed elsewhere
+st.header("1.2 Preprocessing & Split — Description")
+st.markdown(
+    """
+    The dataset is preprocessed and split using the following steps:
+
+    - Normalize column names (strip and collapse whitespace).
+    - Trim whitespace from string/object columns.
+    - Coerce object columns that are numeric-like when the majority of values convert to numeric.
+    - Impute numeric columns with the column median.
+    - Impute categorical columns with the explicit token `'missing'` and cast to `category`.
+    - Add log1p-transformed copies for identified skewed numeric features (e.g., `Charge Amount`, `Customer Value`, `Seconds of Use`).
+    - Ensure the `Churn` target is integer-typed and perform a stratified train/test split (80/20) to preserve class balance; outputs saved as `train.csv` and `test.csv`.
+    """
+)
 
 st.markdown("---")
 st.header("2. Model Selection and Prediction")
