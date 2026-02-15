@@ -42,7 +42,7 @@ Six ML models were trained and evaluated:
 | Random Forest        | 0.940 | 0.985 | 0.736 | 0.960 | 0.833 | 0.808 |
 | XGBoost              | 0.963 | 0.990 | 0.858 | 0.919 | 0.888 | 0.867 |
 
-### Detailed Observations on Model Performance (Test Data)
+### Observations on Model Performance [3 marks]
 | ML Model Name         | Detailed Observation about model performance |
 |----------------------|---------------------------------------------|
 | Logistic Regression  | Moderate overall (Accuracy 0.871, AUC 0.926). Good balance with recall (0.818) capturing most churns while precision (0.562) keeps false positives moderate; F1 (0.667) and MCC (0.606) make it a solid interpretable baseline. |
@@ -51,16 +51,6 @@ Six ML models were trained and evaluated:
 | Naive Bayes (Gaussian)| Decent recall (0.889) but lower precision (0.361) and moderate accuracy (0.735). F1 (0.513) and MCC (0.445) indicate it's a fast baseline with limited overall effectiveness. |
 | Random Forest        | Very strong AUC (0.985) and excellent recall (0.960) with balanced precision (0.736). F1 (0.833) and MCC (0.808) show ensemble robustness and strong holdout performance. |
 | XGBoost              | Best overall (Accuracy 0.963, AUC 0.990). High precision (0.858) and recall (0.919) yield top F1 (0.888) and MCC (0.867), making XGBoost the recommended production model for performance-focused use. |
-
-### Observations on Model Performance [3 marks]
-| ML Model Name         | Observation about model performance |
-|----------------------|-------------------------------------|
-| Logistic Regression  | Good balance (Precision 0.5625, Recall 0.8182); solid interpretable baseline (F1 0.6667, MCC 0.6063). |
-| Decision Tree        | Strong and interpretable (Precision 0.8019, Recall 0.8586; F1 0.8293). |
-| KNN                  | Competitive non-parametric option (AUC 0.9611, Recall 0.8889; F1 0.8263). |
-| Naive Bayes (Gaussian)| Fast baseline with high recall but low precision (Precision 0.3607, Recall 0.8889; F1 0.5131). |
-| Random Forest        | Robust ensemble with very high AUC and recall (AUC 0.9854, Recall 0.9596; F1 0.8333). |
-| XGBoost              | Top-performing model (AUC 0.9904, Precision 0.8585, Recall 0.9192; F1 0.8878, MCC 0.8668). |
 
 ## Hyperparameter Trials
 
